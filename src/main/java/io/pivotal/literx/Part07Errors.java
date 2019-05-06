@@ -40,11 +40,11 @@ public class Part07Errors {
 	}
 
 	Flux<User> capitalizeMany(Flux<User> flux) {
-		return flux.flatMap(user -> {
+		return flux.map(user -> {
 			try {
-				return Mono.just(capitalizeUser(user));
-			} catch (GetOutOfHereException e1) {
-				return Flux.error(new GetOutOfHereException());
+				return capitalizeUser(user);
+			} catch (GetOutOfHereException e) {
+				throw Exceptions.propagate(e);
 			}
 		});
 	}
