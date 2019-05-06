@@ -18,28 +18,31 @@ package io.pivotal.literx;
 
 import java.util.concurrent.CompletableFuture;
 
+import org.reactivestreams.Publisher;
+
 import io.pivotal.literx.domain.User;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * Learn how to adapt from/to RxJava 2 Observable/Single/Flowable and Java 8+ CompletableFuture.
+ * Learn how to adapt from/to RxJava 2 Observable/Single/Flowable and Java 8+
+ * CompletableFuture.
  *
- * Mono and Flux already implements Reactive Streams interfaces so they are natively
- * Reactive Streams compliant + there are {@link Mono#from(Publisher)} and {@link Flux#from(Publisher)}
- * factory methods.
+ * Mono and Flux already implements Reactive Streams interfaces so they are
+ * natively Reactive Streams compliant + there are {@link Mono#from(Publisher)}
+ * and {@link Flux#from(Publisher)} factory methods.
  *
- * For RxJava 2, you should not use Reactor Adapter but only RxJava 2 and Reactor Core.
+ * For RxJava 2, you should not use Reactor Adapter but only RxJava 2 and
+ * Reactor Core.
  *
  * @author Sebastien Deleuze
  */
 public class Part09Adapt {
 
-//========================================================================================
+	// ========================================================================================
 
 	// TODO Adapt Flux to RxJava Flowable
 	Flowable<User> fromFluxToFlowable(Flux<User> flux) {
@@ -51,7 +54,7 @@ public class Part09Adapt {
 		return null;
 	}
 
-//========================================================================================
+	// ========================================================================================
 
 	// TODO Adapt Flux to RxJava Observable
 	Observable<User> fromFluxToObservable(Flux<User> flux) {
@@ -63,7 +66,7 @@ public class Part09Adapt {
 		return null;
 	}
 
-//========================================================================================
+	// ========================================================================================
 
 	// TODO Adapt Mono to RxJava Single
 	Single<User> fromMonoToSingle(Mono<User> mono) {
@@ -75,16 +78,12 @@ public class Part09Adapt {
 		return null;
 	}
 
-//========================================================================================
-
-	// TODO Adapt Mono to Java 8+ CompletableFuture
 	CompletableFuture<User> fromMonoToCompletableFuture(Mono<User> mono) {
-		return null;
+		return mono.toFuture();
 	}
 
-	// TODO Adapt Java 8+ CompletableFuture to Mono
 	Mono<User> fromCompletableFutureToMono(CompletableFuture<User> future) {
-		return null;
+		return Mono.fromFuture(future);
 	}
 
 }
